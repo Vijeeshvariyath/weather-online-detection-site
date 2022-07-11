@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Blaka&family=Chilanka&family=Covered+By+Your+Grace&family=Koulen&family=Manjari:wght@100&display=swap" rel="stylesheet">
+     <!-- CSS only -->
+     <link
+     href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+     rel="stylesheet"
+     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+     crossorigin="anonymous"
+   />
+   <!-- JavaScript Bundle with Popper -->
+   <script
+     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+     crossorigin="anonymous"
+   ></script>
+
+   <script src="https://kit.fontawesome.com/5215b4590f.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./style.css">
+    <title>Weather Project</title>
+</head>
+<body>
+    
+    <marquee width="40%" direction="down" height="50px" style="margin-left: 550px;" class="text-danger">
+       <b> Welcome to Weather Online</b>
+        </marquee>
+        
+
+
+    <div class="main">
+    <div class="one">
+
+
+         <div class="img"></div> 
+
+        <b style="font-size: larger;"> <h2>Weather Online</h2> </b> 
+
+       
+
+    </div>
+    
+   
+    <div class="two" id="result">
+
+        
+       
+          <div class="search-box"> 
+             <input type="text" placeholder="Enter Location..." style="color: rgb(211, 58, 58);" id="cname"> 
+            <a href="##" class="icon" >
+                 <i class="fas fa-search" onclick="search()"></i> 
+            </a>
+        </div>   
+
+
+
+         <!-- <h3 id="h3">Kochi</h3>
+        <h5 id="h5">23°C</h5> 
+
+<br>
+        <h6 style="text-align: center;"><b style="margin-top: 50px;">Weather Details</b></h6>
+<br>
+        <h6 style="margin-left: 20px;">Country</h6>
+        <h6 style="margin-left: 30px;">IN</h6>
+
+        <br>
+        <h6 style="margin-left: 20px;">Humidity</h6>
+        <h6 style="margin-left: 30px;">94%</h6>
+<br>
+
+<h6 style="margin-left: 20px;">Wind</h6>
+<h6 style="margin-left: 30px;">8 km/h</h6>
+
+<br>
+
+<h6 style="margin-left: 20px;">Pressure</h6>
+<h6 style="margin-left: 30px;">1011</h6>  -->
+
+    </div>
+
+    
+    
+    
+</div>
+
+
+
+</body>
+
+<script>
+
+function search()
+{
+    city = cname.value
+
+     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8ac5c4d57ba6a4b3dfcf622700447b1e`).then(result=>result.json())
+    .then(data=>displayData(data))
+    .catch("City not found")
+}
+
+function displayData(weatherDetails)
+{
+
+
+
+     cityname = weatherDetails.name
+    feellike = weatherDetails.main.feels_like
+    pressure = weatherDetails.main.pressure
+     humidity = weatherDetails.main.humidity
+     country = weatherDetails.sys.country
+     Temperature = weatherDetails.main.temp
+    
+    htmlData = `
+
+    <h3 id="h3">${cityname}</h3>
+    <b><h6 style ="margin-left: 20px">Feel's Like </b>
+        <h6 id="h5">${feellike}</h6> 
+
+<br>
+        <h6 style="text-align: center;"><b style="margin-top: 50px;">Weather Details</b></h6>
+
+        <h6 style="margin-left: 20px;">Country</h6>
+        <h6 style="margin-left: 30px;">${country}</h6>
+
+        <br>
+        <h6 style="margin-left: 20px;">Humidity</h6>
+        <h6 style="margin-left: 30px;">${humidity}</h6>
+<br>
+
+
+
+<h6 style="margin-left: 20px;">Pressure</h6>
+<h6 style="margin-left: 30px;">${pressure}</h6> 
+<br>
+<h6 style="margin-left: 20px;">Temperature</h6>
+<h6 style="margin-left: 30px;">${Temperature}</h6>
+
+
+
+    `
+result.innerHTML = htmlData
+
+}
+
+</script>
+
+
+
+
+</html>
